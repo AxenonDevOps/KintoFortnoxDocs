@@ -2,9 +2,9 @@
 
 # -- Project information
 
-project = 'Lumache'
-copyright = '2021, Graziella'
-author = 'Graziella'
+project = 'KintoFortnox Documentation'
+copyright = '2022, Axenon'
+author = 'Andreas Timoudas'
 
 release = '0.1'
 version = '0.1.0'
