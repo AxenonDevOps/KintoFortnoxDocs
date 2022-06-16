@@ -16,8 +16,8 @@ Contents
 .. toctree::
 
    usage
-   Fortnox client
+   fortnox_client
+   data_model
    Dataflow - Azure
-   DataModel - PaymentFlow
    Map APEX Batch Classes
 
