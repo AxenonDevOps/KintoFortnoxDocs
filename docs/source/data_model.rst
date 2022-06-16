@@ -1,9 +1,9 @@
-Data models
+Data Models
 ===========
 
-Payment flow data model
+Payment Data Model
 -----------------------
 
 
-Ridecell Invoice data model
+Ridecell Data Model
 ---------------------------
