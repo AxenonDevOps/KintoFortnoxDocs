@@ -1,2 +1,3 @@
+# Ignore IDE specific files
 .vscode/
 docs/.DS_Store
