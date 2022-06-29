@@ -1,7 +1,7 @@
+.. toctree::
+
 Batch Classes 
 =============
 
-.. toctree::
 
 :ref:`BatchCreateFortnoxInvoiceFromRidecell`
---------------------------------------------
