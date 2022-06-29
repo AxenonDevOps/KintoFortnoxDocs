@@ -1,2 +1,2 @@
-BatchCreateFortnoxRefundPayment.cls
+BatchCreateFortnoxRefundPayment
 -----------------------------------

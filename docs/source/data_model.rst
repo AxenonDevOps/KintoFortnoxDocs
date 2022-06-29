@@ -17,7 +17,7 @@ The main four objects in Salesforce for this data model is:
 ``Payment__c`` objects are created by **MiracleMill** and sent to Kinto Salesforce instance.
 ``Fortnox_Invoice__c`` and ``Fortnox_Invoice_Rows__c`` objects are created in the following batch classes:
 
-* ``BatchCreateFortnoxInvoiceFromPayment.cls``
+* :ref:`BatchCreateFortnoxInvoiceFromPayment`
 
 
 When a ``Fortnox_Invoice__c`` is created  ``Fortnox_Invoice_Rows__c`` are subsequently created and linked to to the 
@@ -26,9 +26,9 @@ by a lookup field.
 
 ``Fortnox_Invoice_Payments__c`` objects are created in the following batch classes:
 
-* :ref:`BatchCreateFortnoxPaymentFromPayment.cls`
-* :ref:`BatchCreateFortnoxRefundPayment.cls`
-* :ref:`BatchCreateSpecialFortnoxPayment.cls`
+* :ref:`BatchCreateFortnoxPaymentFromPayment`
+* :ref:`BatchCreateFortnoxRefundPayment`
+* :ref:`BatchCreateSpecialFortnoxPayment`
 
 In short, these batch classes generete ``Fortnox_Invoice_Payments__c`` objects from ``Payment__c`` where a 
 ``Fortnox_Invoice__c`` has been previously created and linked to the ``Payment__c``. After creation of the the 
@@ -42,6 +42,5 @@ Ridecell Data Model
 The **Ridecell Data Model** has similair structure as the **Payment Data Model**,
 and branches out from the Ridecell Invoice ``(Ridecell_Invoice__c)``.
 
-* ``BatchCreateFortnoxInvoiceFromRidecell.cls``
-
-* ``BatchCreateFortnoxPaymentFromRidecell.cls``
+* :ref:`BatchCreateFortnoxInvoiceFromRidecell`
+* :ref:`BatchCreateFortnoxPaymentFromRidecell`

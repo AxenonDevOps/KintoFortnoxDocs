@@ -1,2 +1,2 @@
-BatchCreateSpecialFortnoxPayment.cls
+BatchCreateSpecialFortnoxPayment
 ------------------------------------
