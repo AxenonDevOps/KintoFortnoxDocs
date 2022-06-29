@@ -62,4 +62,15 @@ other fields in the ``Payment__c`` object:
         STATE__c = 'SUCCESSED'
 
 
-The SOQL query captures three states, mainly; ``FAILED``, ``MEMBERSHIP REFUNDED``, and ``SUCCESSED``.
+The SOQL query captures three states, mainly; ``FAILED``, ``MEMBERSHIP REFUNDED``, and ``SUCCESSED``. 
+It then moves on to check if ``Payment__c`` is exempted from payment, e.g., "free of payment" and that
+created date is later than 2020-12-01. 
+
+The execution method 
+
+.. code-block:: java
+    public void execute(Database.BatchableContext bc, List<Payment__c> payments) {
+        ...business logic
+    }
+
+
