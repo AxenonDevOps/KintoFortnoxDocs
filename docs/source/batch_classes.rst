@@ -1,0 +1,2 @@
+.. toctree::
+    :ref:`BatchCreateFortnoxInvoiceFromRidecell`
