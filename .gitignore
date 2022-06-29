@@ -1,3 +1,4 @@
 # Ignore IDE specific files
 builddir/
 settings.json
+.DS_Store
