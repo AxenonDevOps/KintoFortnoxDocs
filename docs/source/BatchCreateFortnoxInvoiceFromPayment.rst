@@ -61,4 +61,5 @@ other fields in the ``Payment__c`` object:
     else:
         STATE__c = 'SUCCESSED'
 
-    
+
+The SOQL query captures three states, mainly; ``FAILED``, ``MEMBERSHIP REFUNDED``, and ``SUCCESSED``.
