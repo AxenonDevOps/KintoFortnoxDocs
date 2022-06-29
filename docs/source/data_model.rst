@@ -26,8 +26,7 @@ by a lookup field.
 
 ``Fortnox_Invoice_Payments__c`` objects are created in the following batch classes:
 
-:ref:`BatchCreateFortnoxPaymentFromPayment.cls`
-.. * ``BatchCreateFortnoxPaymentFromPayment.cls``
+* :ref:`BatchCreateFortnoxPaymentFromPayment.cls`
 * ``BatchCreateFortnoxRefundPayment.cls``
 * ``BatchCreateSpecialFortnoxPayment.cls``
 
