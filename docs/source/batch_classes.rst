@@ -3,4 +3,5 @@ Batch Classes
 
 .. toctree::
 
-    :ref:`BatchCreateFortnoxInvoiceFromRidecell`
+:ref:`BatchCreateFortnoxInvoiceFromRidecell`
+--------------------------------------------

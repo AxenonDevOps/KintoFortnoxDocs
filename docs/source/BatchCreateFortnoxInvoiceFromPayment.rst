@@ -5,7 +5,8 @@ The batch class retrieves objects from ``Payment__c`` with below SOQL query:
 
 .. code-block::
 
-    SELECT Id, ...,
+    SELECT Id, 
+    ...,
     FROM Payment__c 
     WHERE 
         Fortnox_Invoice__c = null
