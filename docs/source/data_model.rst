@@ -9,19 +9,16 @@ Payment Data Model
 The Payment data model consists of several connected objects.
 The main four objects in Salesforce for this data model is:
 
-* Payment
-* Fortnox Invoice
-* Fortnox Invoice Rows
-* Fortnox Invoice Payment
+* Payment (Payment__c)
+* Fortnox Invoice (Fortnox_Invoice__c)
+* Fakturarad (Fortnox_Invoice_Rows__c)
+* Fortnox Invoice Payment (Fortnox_Invoice_Payments__c)
 
-.. graphviz::
-    digraph LookupRelations {
-        Payment -> Fortnox_Invoice [arrowtail = "crow", dir="back"]
-        Payment -> Fornox_Invoice_Payment [arrowtail = "crow", dir="back"]
-        Fortnox_Invoice -> Fortnox_Invoice_Rows [arrowhead = "crow"]
-        Fortnox_Invoice -> Fornox_Invoice_Payment [arrowhead = "crow"]
-    }
-
+``Payment__c`` objects are created by **MiracleMill** and sent to Kinto Salesforce instance.
+``Fortnox_Invoice__c`` objects are created in ``BatchCreateFortnoxInvoiceFromPayment.cls``
+and ``BatchCreateFortnoxInvoiceFromRidecell.cls``. When a ``Fortnox_Invoice__c``is created
+``Fortnox_Invoice_Rows__c`` are subsequently created and linked to to the ``Fortnox_Invoice__c```
+object.
 
 
 Ridecell Data Model
