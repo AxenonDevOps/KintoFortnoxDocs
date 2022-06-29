@@ -3,7 +3,7 @@ BatchCreateFortnoxInvoiceFromPayment
 
 The batch class retrieves objects from ``Payment__c`` with below SOQL query:
 
-.. code-block:
+.. code-block::
     SELECT Id, ...,
     FROM Payment__c 
     WHERE 
@@ -11,7 +11,7 @@ The batch class retrieves objects from ``Payment__c`` with below SOQL query:
         AND STATE__c != 'CANCELLED'
         AND STATE__c != 'MEMBERSHIP FAILED PAYMENT'
         AND STATE__c != 'INCOMPLETE'
-        AND STATE__c != 'REFUNDED' ' + //We handle refunded payments in a separate batch
+        AND STATE__c != 'REFUNDED'
         AND Fortnox_Sync_Onhold__c = false
         AND is_exempted__c = false
         AND CreatedDate >= 2020-12-01T11:00:00Z
