@@ -32,7 +32,7 @@ by a lookup field.
 
 In short, these batch classes generete ``Fortnox_Invoice_Payments__c`` objects from ``Payment__c`` where a 
 ``Fortnox_Invoice__c`` has been previously created and linked to the ``Payment__c``. After creation of the the 
-``Fortnox_Invoice_Payments__c``it is linked to the ``Payment__c`` which it was created from.
+``Fortnox_Invoice_Payments__c`` it is linked to the ``Payment__c`` which it was created from.
 
 
 
