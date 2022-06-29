@@ -18,6 +18,7 @@ Contents
    usage
    fortnox_client
    data_model
+   batch_classes
    Dataflow - Azure
    Map APEX Batch Classes
 
