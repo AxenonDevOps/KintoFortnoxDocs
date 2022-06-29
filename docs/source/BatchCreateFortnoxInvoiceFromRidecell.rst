@@ -1,10 +1,10 @@
 BatchCreateFortnoxInvoiceFromRidecell
--------------------------------------
+----------------------------------------
 
 The batch class retrieves objects from ``Ridecell_Invoice__c`` with below SOQL query:
 
 .. code-block::
-    
+
     SELECT id__c, 
         ...,
         FROM Ridecell_Invoice__c

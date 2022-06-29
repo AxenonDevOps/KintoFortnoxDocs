@@ -69,7 +69,8 @@ created date is later than 2020-12-01.
 
 The execution method 
 
-.. code-block:: java
+.. code-block::
+    
     public void execute(Database.BatchableContext bc, List<Payment__c> payments) {
         ...business logic
     }

@@ -1,7 +1,11 @@
+Batch classes
+==============
+
 .. toctree::
 
-Batch Classes 
-=============
-
-
-:ref:`BatchCreateFortnoxInvoiceFromRidecell`
+    BatchCreateFortnoxInvoiceFromPayment
+    BatchCreateFortnoxInvoiceFromRidecell
+    BatchCreateFortnoxPaymentFromPayment
+    BatchCreateFortnoxPaymentFromRidecell
+    BatchCreateFortnoxRefundPayment
+    BatchCreateSpecialFortnoxPayment

@@ -1,0 +1,10 @@
+Method,URL,Action,Params,Payload,Description
+**getInvoiceById()**,``/invoices/{id}``,``GET``,*id: String*,,Get a specific invoice
+**createInvoice()**,``/invoices``,``POST``,,*FortnoxInvoice*,Create an invoice
+**bookkeepInvoice()**,``/invoices/{documentNumber}/bookkeep``,``PUT``,*documentNumber: String*,,Bookkeep a specific invoice
+**createPayment()**,``/invoicepayments``,``POST``,,*FortnoxInvoicePayment*,Create an invoice payment
+**bookkeepPayment()**,``/invoicepayments/{paymentNumber}/bookkeep``,``PUT``,*paymentNumber: String*,,Bookkeep a specific invoice payment
+**CreateCustomer()**,``/customers``,``POST``,,*FortnoxCustomer*,Create a new customer
+**getCustomerNumberByEmail()**,``/customers/?email={email}&filter=active&limit=1``,``GET``,*email: string*,,Get specific customer by email
+**updateCustomer()**,``/customers/{customerNumber}``,``PUT``,*customerNumber: String*,,Update an existing customer
+**getCustomerNumberOrganisationNumber()**,``/customers/?organisationnumber={organisationNumber}``,``GET``,*organisationNumber: String*,,Get customers by organisation number

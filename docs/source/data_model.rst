@@ -21,7 +21,7 @@ The main four objects in Salesforce for this data model is:
 
 ``Fortnox_Invoice__c`` and ``Fortnox_Invoice_Rows__c`` objects are created in the following batch class:
 
-* :ref:`BatchCreateFortnoxInvoiceFromPayment`
+* :doc:`/BatchCreateFortnoxInvoiceFromPayment`
 
 
 When a ``Fortnox_Invoice__c`` is created ``Fortnox_Invoice_Rows__c`` are subsequently created and linked to to the 
@@ -30,9 +30,9 @@ by a lookup field.
 
 ``Fortnox_Invoice_Payments__c`` objects are created in the following batch classes:
 
-* :ref:`BatchCreateFortnoxPaymentFromPayment`
-* :ref:`BatchCreateFortnoxRefundPayment`
-* :ref:`BatchCreateSpecialFortnoxPayment`
+* :doc:`/BatchCreateFortnoxPaymentFromPayment`
+* :doc:`/BatchCreateFortnoxRefundPayment`
+* :doc:`/BatchCreateSpecialFortnoxPayment`
 
 In short, these batch classes generete ``Fortnox_Invoice_Payments__c`` objects from ``Payment__c`` where a 
 ``Fortnox_Invoice__c`` has been previously created and linked to the ``Payment__c``. After creation of the the 
@@ -48,12 +48,12 @@ and branches out from the Ridecell Invoice ``(Ridecell_Invoice__c)``.
 
 ``Fortnox_Invoice__c`` and ``Fortnox_Invoice_Rows__c`` objects are created in the following batch class:
 
-* :ref:`BatchCreateFortnoxInvoiceFromRidecell`
+* :doc:`/BatchCreateFortnoxInvoiceFromRidecell`
 
 The only difference from the **Payment flow** being that the objects are linked to ``Ridecell_Invoice__c`` 
 instead of ``Payment__c`` objects.
 
-* :ref:`BatchCreateFortnoxPaymentFromRidecell`
+* :doc:`/BatchCreateFortnoxPaymentFromRidecell`
 
 Above batch class is responsible for creating ``Fortnox_Invoice_Payments__c``object and
 has the same logic as in the **Payment Flow**, only difference beign that the created objects are

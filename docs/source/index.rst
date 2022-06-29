@@ -1,5 +1,5 @@
 Welcome to Kinto Fortnox documentation!
-===================================
+=======================================
 
 **Kinto Fortnox** integration documentation of workflows, the Fortnox client,
 Dataflow, Datamodels and mapping of APEX Batch classes.

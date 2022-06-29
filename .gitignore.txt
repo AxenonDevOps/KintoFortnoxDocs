@@ -1,4 +1,5 @@
 # Ignore IDE specific files
 .vscode/
+docs/source/.DS_Store
 builddir/
 settings.json
