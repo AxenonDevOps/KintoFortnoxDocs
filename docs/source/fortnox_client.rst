@@ -1,3 +1,5 @@
+.. toctree::
+
 Fortnox client
 ==============
 
