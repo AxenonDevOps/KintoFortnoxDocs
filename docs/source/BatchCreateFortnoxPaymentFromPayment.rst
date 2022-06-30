@@ -26,7 +26,7 @@ The batch class retrieves objects from ``Payment__c`` with below SOQL query:
                     AND subscription_id__c != NULL 
                     AND Type__c = lease 
                 )
-            );
+            )
 
 
 Execution method
@@ -77,49 +77,28 @@ attribute as to create a relationship, before the payment is updated.
 createPayment
 ------------------
 
-``createInvoiceRows`` generates ``Fortnox_Invoice_Rows__c`` which are linked to a ``Fortnox_Invoice__c``. Multiple
-`invoice rows` can be linked to a single `invoice`. Billable items from **Ridecell** are stipulated in ``Product2`` 
-object in **Salesforce** include 
-``Towing, Overduefee, Parkingfine, Excess, Billinginvoicetypephrasekeyrepair,
-TrafficExces, Tolls, BillinginvoicetypephrasekeyspecialCleaning, Other``. 
+``createPayment`` generates ``Fortnox_Invoice_Payments__c`` which is linked 
+to a ``Payment__c`` and a ``Fortnox_Invoice__c.``. 
 
 .. code-block:: javascript
 
-    public static List<Fortnox_Invoice_Rows__c> createInvoiceRows(Ridecell_Invoice__c ridecellInvoice, String invoiceId) {
-        List<Fortnox_Invoice_Rows__c> invoiceRows = new List<Fortnox_Invoice_Rows__c>();
+     public static Fortnox_Invoice_Payments__c createPayment(Payment__c payment, String invoiceId, Decimal amount) {
+        //Create the Salesforce Invoice Payment
+        Fortnox_Invoice_Payments__c fortnoxPayment = new Fortnox_Invoice_Payments__c(
+            Fortnox_Invoice__c = invoiceId,
+            Amount__c = amount,
+            CurrencyIsoCode = payment.CurrencyIsoCode,
+            Payment_Date__c = payment.CreatedDate.date()
+        );
+        
+        
+        //Insert it so we get an Id
+        insert fortnoxPayment;
 
-        invoiceRows.add(new Fortnox_Invoice_Rows__c(
-            Product__c = FortnoxProductHelper.idByViolationType(
-                ridecellInvoice.violation_type__c,
-                ridecellInvoice.CurrencyIsoCode
-            ),
-            Antal__c = 1,
-            A_Pris__c = ridecellInvoice.violation_amount__c,
-            Row_Sum_With_VAT__c = ridecellInvoice.violation_amount__c * (1 + FortnoxProductHelper.vatByViolationType(
-                ridecellInvoice.violation_type__c, ridecellInvoice.CurrencyIsoCode
-            )),
-            Fortnox_Invoice__c = invoiceId
-        ));
         
-        if (ridecellInvoice.handling_fee_amount__c > 0) {
-            invoiceRows.add(new Fortnox_Invoice_Rows__c(
-                Product__c = FortnoxProductHelper.idByViolationType(
-                    'Administrative fee',
-                    ridecellInvoice.CurrencyIsoCode
-                ),
-                Antal__c = 1,
-                A_Pris__c = ridecellInvoice.handling_fee_amount__c / 1.25, //Ridecell's value is VAT included
-                Row_Sum_With_VAT__c = ridecellInvoice.handling_fee_amount__c,
-                Fortnox_Invoice__c = invoiceId
-            ));
-        }
-
-        for (Fortnox_Invoice_Rows__c invoiceRow : invoiceRows) {
-            invoiceRow.CurrencyIsoCode = ridecellInvoice.CurrencyIsoCode;
-        }
+        //Assign the Id to the Ridecell Invoice
+        payment.Fortnox_Invoice_Payments__c = fortnoxPayment.Id;
+        update payment;
         
-        insert invoiceRows;
-        
-        return invoiceRows;
+        return fortnoxPayment;
     }
-
