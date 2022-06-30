@@ -25,7 +25,8 @@ Execution method
 The class implements ``Database.Batchable<sObject>`` and executes with a list of ``Ridecell_Invoice__c`` as parameter.
 Before each ``Ridecell_Invoice__c`` is processed a rollback point is set if any errors occurs. A ``Fortnox_Invoice__c`` 
 matching the ``Ridecell_Invoice__c`` based on attributes is then retrieved in the ``getMatchingInvoice()`` method,
-explained more :ref:`here<BatchCreateSpecialFortnoxPayment:getMatchingInvoice>`.
+explained more :ref:`here<BatchCreateSpecialFortnoxPayment:getMatchingInvoice()>`. The `Fortnox invoice id` is 
+later assigned as an attribute to ``Ridecell_Invoice__c.Fortnox_Invoice__c``.
 
 An ``Fortnox_Invoice_Payments__c`` is then created from the ``createInvoicePayment()`` method, 
 where the ``Fortnox_Invoice__c.Id``,  ``Ridecell_Invoice__c.Total_Amount__c``, ``Ridecell_Invoice__c.CreatedDate.date()``,
@@ -34,7 +35,7 @@ The `Fortnox payment` is inserted after creation and it's `id` is assigned
 to the ``Ridecell_Invoice__c.Fortnox_Invoice_Payments__c`` 
 attribute as to create a relationship, before the payment is updated.  
 ``createInvoicePayment()`` is explained in further detail 
-:ref:`here <BatchCreateSpecialFortnoxPayment:createInvoicePayment>`.
+:ref:`here <BatchCreateSpecialFortnoxPayment:createInvoicePayment()>`.
 
 .. code-block:: javascript
     
@@ -84,11 +85,11 @@ attribute as to create a relationship, before the payment is updated.
     }
 
 
-getMatchingInvoice
+getMatchingInvoice()
 ---------------------
 
 .. code-block:: javascript
-    
+
     public static Fortnox_Invoice__c getMatchingInvoice(Ridecell_Invoice__c ridecellInvoice) {
         //Find the corresponding Fortnox Invoice
         //that already has been created based on a failed Payment
@@ -109,10 +110,10 @@ getMatchingInvoice
         }
     }
 
-createInvoicePayment
----------------------
+createInvoicePayment()
+-----------------------
 
-``createRefundPayment`` generates ``Fortnox_Invoice_Payments__c`` which is linked 
+``createInvoicePayment`` generates ``Fortnox_Invoice_Payments__c`` which is linked 
 to a ``Fortnox_Invoice__c.``. 
 
 .. code-block:: javascript

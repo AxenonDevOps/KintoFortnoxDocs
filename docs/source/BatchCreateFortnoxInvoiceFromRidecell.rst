@@ -27,7 +27,7 @@ The invoice is inserted after creation and it's `id` is assigned to the ``Ridece
 attribute as to create a relationship, before the payment is updated. After the `invoice` is created, 
 ``createInvoiceRows()`` method is called, which populate the invoice with billable 
 items, dependent on different attribute values in the ``Ridecell_Invoice__c`` that is passed as an argument. 
-``createInvoiceRows()`` is explained in further detail :ref:`here <BatchCreateFortnoxInvoiceFromRidecell:createInvoiceRows>`.
+``createInvoiceRows()`` is explained in further detail :ref:`here <BatchCreateFortnoxInvoiceFromRidecell:createInvoiceRows()>`.
 
 .. code-block:: javascript
     
@@ -59,8 +59,8 @@ items, dependent on different attribute values in the ``Ridecell_Invoice__c`` th
     }
 
 
-createInvoiceRows
-------------------
+createInvoiceRows()
+--------------------
 
 ``createInvoiceRows`` generates ``Fortnox_Invoice_Rows__c`` which are linked to a ``Fortnox_Invoice__c``. Multiple
 `invoice rows` can be linked to a single `invoice`. Billable items from **Ridecell** are stipulated in ``Product2`` 

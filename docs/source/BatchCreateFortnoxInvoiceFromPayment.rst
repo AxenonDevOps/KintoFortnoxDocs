@@ -80,7 +80,7 @@ as an argument. The `Fortnox invoice` is inserted after creation and it's `id` i
 ``Payment__c.Fortnox_Invoice__c``  attribute as to create a relationship, before the payment is updated. After the `invoice` is created, 
 ``createInvoiceRows()`` method is called, which populate the invoice with billable 
 items, dependent on different attribute values in the ``Payment__c`` that is passed as an argument. 
-``createInvoiceRows()`` is explained in further detail :ref:`here <BatchCreateFortnoxInvoiceFromPayment:createInvoiceRows>`.
+``createInvoiceRows()`` is explained in further detail :ref:`here <BatchCreateFortnoxInvoiceFromPayment:createInvoiceRows()>`.
 
 .. code-block:: javascript
     
@@ -134,8 +134,8 @@ Before finishing the the ``Payment__c`` object is updated with summurized credit
 If any errors occur, the database is rolled back to the latest savepoint and an error log is inserted into 
 the ``Fortnox_Integration_Error_Log__c`` object.
 
-createInvoiceRows
-------------------
+createInvoiceRows()
+--------------------
 
 ``createInvoiceRows`` generates ``Fortnox_Invoice_Rows__c`` which are linked to a ``Fortnox_Invoice__c``. Multiple
 `invoice rows` can be linked to a single `invoice`. Before any `invoice rows` are created, a sign factor is set

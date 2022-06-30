@@ -27,7 +27,7 @@ An ``Fortnox_Invoice_Payments__c`` is then  created from the ``createInvoicePaym
 where the ``Ridecell_Invoice__c`` is passed as an argument. 
 The `Fortnox payment` is inserted after creation and it's `id` is assigned to the 
 ``ridecellInvoice.Fortnox_Invoice_Payments__c`` attribute as to create a relationship, before the payment is updated.  
-``createInvoicePayment()`` is explained in further detail  :ref:`here <BatchCreateFortnoxPaymentFromRidecell:createInvoicePayment>`.
+``createInvoicePayment()`` is explained in further detail  :ref:`here <BatchCreateFortnoxPaymentFromRidecell:createInvoicePayment()>`.
 
 .. code-block:: javascript
     
@@ -59,7 +59,7 @@ The `Fortnox payment` is inserted after creation and it's `id` is assigned to th
     }
 
 
-createInvoicePayment
+createInvoicePayment()
 -----------------------
 
 ``createInvoicePayment`` generates ``Fortnox_Invoice_Payments__c`` which is linked 

@@ -38,7 +38,7 @@ is then  created from the ``createPayment()`` method, where the ``Payment__c`` i
 The `Fortnox payment` is inserted after creation and it's `id` is assigned to the ``Payment__c.Fortnox_Invoice_Payments__c`` 
 attribute as to create a relationship, before the payment is updated.  
 ``createPayment()`` is explained in further detail 
-:ref:`here <BatchCreateFortnoxPaymentFromPayment:createPayment>`.
+:ref:`here <BatchCreateFortnoxPaymentFromPayment:createPayment()>`.
 
 .. code-block:: javascript
     
@@ -74,7 +74,7 @@ attribute as to create a relationship, before the payment is updated.
     }
 
 
-createPayment
+createPayment()
 ------------------
 
 ``createPayment`` generates ``Fortnox_Invoice_Payments__c`` which is linked 

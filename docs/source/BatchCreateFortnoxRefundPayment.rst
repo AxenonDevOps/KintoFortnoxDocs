@@ -27,7 +27,7 @@ The `Fortnox payment` is inserted after creation and it's `id` is assigned
 to the ``Payment__c.Fortnox_Invoice_Payments__c`` 
 attribute as to create a relationship, before the payment is updated.  
 ``createRefundPayment()`` is explained in further detail 
-:ref:`here <BatchCreateFortnoxRefundPayment:createRefundPayment>`.
+:ref:`here <BatchCreateFortnoxRefundPayment:createRefundPayment()>`.
 
 .. code-block:: javascript
     
@@ -56,7 +56,7 @@ attribute as to create a relationship, before the payment is updated.
     }
 
 
-createRefundPayment
+createRefundPayment()
 ---------------------
 
 ``createRefundPayment`` generates ``Fortnox_Invoice_Payments__c`` which is linked 
