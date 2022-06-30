@@ -74,12 +74,13 @@ Execution method
 -----------------
 
 The class implements ``Database.Batchable<sObject>`` and executes with a list of ``Payment__c`` as parameter.
-Before each ``Payment__c`` is processed a rollback point is set if any errors occurs. An invoice is then created
-from the ``createInvoice()`` method which returns a ``Fortnox_Invoice__c``, where the ``Payment__c`` is passed 
+Before each ``Payment__c`` is processed a rollback point is set if any errors occurs. An ``Fortnox_Invoice__c`` is then created
+from the ``createInvoice()`` method, where the ``Payment__c`` is passed 
 as an argument. The invoice is inserted after creation and it's `id` is assigned to the ``Payment__c.Fortnox_Invoice__c`` 
-attribute as to create a relationship, the payment is then updated. After the `invoice` is created, ``createInvoiceRows()`` method is called, which populate the invoice with billable 
+attribute as to create a relationship, before the payment is updated. After the `invoice` is created, 
+``createInvoiceRows()`` method is called, which populate the invoice with billable 
 items, dependent on different attribute values in the ``Payment__c`` that is passed as an argument. 
-``createInvoiceRows()`` is explained in further detail :ref:`here <createInvoiceRows>`.
+``createInvoiceRows()`` is explained in further detail :ref:`here <BatchCreateFortnoxInvoiceFromPayment:createInvoiceRows>`.
 
 .. code-block:: javascript
     
@@ -158,23 +159,23 @@ attribute, the factor is set to ``-1``.
  * - Membership
    - ``is_membership__c``
    - ``true``
-   - :ref:`membership()<Membership>`
+   - :ref:`membership()<BatchCreateFortnoxInvoiceFromPayment:Membership>`
  * - Milage charge
    - ``additional_mileage_charge__c``
    - ``> 1``
-   - :ref:`milageCharge()<Milage charge>`
+   - :ref:`milageCharge()<BatchCreateFortnoxInvoiceFromPayment:Milage charge>`
  * - Late Return Fee
    - ``Late_Return_Fee__c``
    - ``> 0``
-   - :ref:`lateReturnFee()<Late Return Fee>`
+   - :ref:`lateReturnFee()<BatchCreateFortnoxInvoiceFromPayment:Late Return Fee>`
  * - Promo Credit
    - ``Credit_amount_used_N__c``
    - ``> 0``
-   - :ref:`promoCredit()<Promo Credit>`
+   - :ref:`promoCredit()<BatchCreateFortnoxInvoiceFromPayment:Promo Credit>`
  * - Addon Charge
    - ``addon_charge__c``
    - ``> 0``
-   - :ref:`addonCharge()<Addon Charge>`
+   - :ref:`addonCharge()<BatchCreateFortnoxInvoiceFromPayment:Addon Charge>`
  * - Block Fare
    - | ``block_fare__c``
      | ``subscription_id__c``
@@ -182,7 +183,7 @@ attribute, the factor is set to ``-1``.
    - | ``> 1``
      | ``NULL``
      | ``lease``
-   - :ref:`blockFare()<Block Fare>`
+   - :ref:`blockFare()<BatchCreateFortnoxInvoiceFromPayment:Block Fare>`
  * - Flex Booking Time
    - | ``is_membership__c``
      | ``total_to_charge__c``
@@ -190,14 +191,13 @@ attribute, the factor is set to ``-1``.
    - | ``false``
      | ``NULL``
      | ``lease``
-   - :ref:`flexBookingTime()<Flex Booking Time>`
+   - :ref:`flexBookingTime()<BatchCreateFortnoxInvoiceFromPayment:Flex Booking Time>`
 
 
 
 Membership
 ^^^^^^^^^^^
 If the customer has a memberhip, indicated by ``Payment.is_membership__c``, only one `invoice row` will be inserted.
-[ADD SECTION WITH REF TO FORTNOX PRODUCT HELPER PAGE]
 
 .. code-block:: javascript
 
@@ -298,7 +298,6 @@ Addon charge
 
 Flex Booking Time
 ^^^^^^^^^^^^^^^^^^^^
-
 
 .. code-block:: javascript
 
