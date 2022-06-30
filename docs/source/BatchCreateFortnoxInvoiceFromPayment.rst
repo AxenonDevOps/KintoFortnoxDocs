@@ -76,8 +76,8 @@ Execution method
 The class implements ``Database.Batchable<sObject>`` and executes with a list of ``Payment__c`` as parameter.
 Before each ``Payment__c`` is processed a rollback point is set if any errors occurs. An ``Fortnox_Invoice__c`` is then created
 from the ``createInvoice()`` method, where the ``Payment__c`` is passed 
-as an argument. The invoice is inserted after creation and it's `id` is assigned to the ``Payment__c.Fortnox_Invoice__c`` 
-attribute as to create a relationship, before the payment is updated. After the `invoice` is created, 
+as an argument. The `Fortnox invoice` is inserted after creation and it's `id` is assigned to the 
+``Payment__c.Fortnox_Invoice__c``  attribute as to create a relationship, before the payment is updated. After the `invoice` is created, 
 ``createInvoiceRows()`` method is called, which populate the invoice with billable 
 items, dependent on different attribute values in the ``Payment__c`` that is passed as an argument. 
 ``createInvoiceRows()`` is explained in further detail :ref:`here <BatchCreateFortnoxInvoiceFromPayment:createInvoiceRows>`.
