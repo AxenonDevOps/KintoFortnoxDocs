@@ -13,7 +13,7 @@ The batch class retrieves objects from ``Fortnox_Invoice__c`` with below SOQL qu
         FROM Fortnox_Invoice__c
         WHERE 
             Refunds_Payment__c != null 
-            AND Fortnox_Refund_Invoice_Payment__c = null'
+            AND Fortnox_Refund_Invoice_Payment__c = null
 
 
 Execution method
