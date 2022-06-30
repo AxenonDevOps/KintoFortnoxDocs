@@ -14,6 +14,7 @@ Contents
 --------
 
 .. toctree::
+   :maxdepth: 3
 
    fortnox_client
    data_model
