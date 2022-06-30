@@ -18,3 +18,4 @@ Contents
    fortnox_client
    data_model
    batch_classes
+   helper_classes

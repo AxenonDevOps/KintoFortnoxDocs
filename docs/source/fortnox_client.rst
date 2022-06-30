@@ -8,7 +8,7 @@ Fortnox client
 `General Guidelines <https://developer.fortnox.se/general/>`_.
 
 
-Endpoints
+Headers
 -----------
 
 The base URL for the Fortnox API: ``https://api.fortnox.se/3``.
@@ -29,6 +29,9 @@ Below headers are used for authentication and to get response in the desired for
      - ``clientSecret()``
    * - ``Access-Token``
      - ``accessToken()``
+
+``clientSecret()`` and ``accessToken()`` are method to retreive respective values which are stored 
+as ``Custom Labels`` in Salesforce.
 
 Methods
 --------

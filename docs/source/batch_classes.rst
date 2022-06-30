@@ -2,6 +2,7 @@ Batch classes
 ==============
 
 .. toctree::
+    :maxdepth: 1
 
     BatchCreateFortnoxInvoiceFromPayment
     BatchCreateFortnoxInvoiceFromRidecell

@@ -1,5 +1,8 @@
 BatchCreateFortnoxInvoiceFromPayment
-----------------------------------------
+=====================================
+
+SOQL query
+-----------
 
 The batch class retrieves objects from ``Payment__c`` with below SOQL query:
 
@@ -67,12 +70,119 @@ The SOQL query captures three states, mainly; ``FAILED``, ``MEMBERSHIP REFUNDED`
 It then moves on to check if ``Payment__c`` is exempted from payment, e.g., "free of payment" and that
 created date is later than 2020-12-01. 
 
-The execution method 
+Execution method
+-----------------
 
-.. code-block::
+The class implements ``Database.Batchable<sObject>`` and executes with a list of ``Payment__c`` as parameter.
+Before each ``Payment__c`` is processed a rollback point is set if any errors occurs. An invoice is then created
+from the ``createInvoice()`` method which returns a ``Fortnox_Invoice__c``, where the ``Payment__c`` is passed 
+as an argument. The invoice is inserted after creation and it's `id` is assigned to the ``Payment__c.Fortnox_Invoice__c`` 
+attribute as to create a relationship, the payment is then updated. After the `invoice` is created, ``createInvoiceRows()`` method is called, which populate the invoice with billable 
+items, dependent on different attribute values in the ``Payment__c`` that is passed as an argument. 
+``createInvoiceRows()`` is explained in further detail :ref:`here <createInvoiceRows>`.
+
+.. code-block:: javascript
     
     public void execute(Database.BatchableContext bc, List<Payment__c> payments) {
-        ...business logic
+        List<Fortnox_Invoice__c> sfInvoices = new List<Fortnox_Invoice__c>();
+        for (Payment__c payment : payments) {
+            //Set a savepoint to rollback to if any error occurs
+            Savepoint savePoint = Database.setSavepoint();
+            
+            try {
+                //Create the Salesforce Invoice
+                Fortnox_Invoice__c invoice = createInvoice(payment);
+
+                //Create the Salesforce Invoice Rows
+                createInvoiceRows(payment, invoice.Id);
+    
+
+Before finishing the the ``Payment__c`` object is updated with summurized credit and debit amount from
+``Fortnox_Invoice_Rows__c`` objects matching the `payment.id` and `invoice.id` respectivly.
+
+.. code-block:: javascript
+
+                //And rollup the invoice sums
+                FortnoxCreditTotals creditTotals = new FortnoxCreditTotals(payment);
+                FortnoxDebitTotals debitTotals = new FortnoxDebitTotals(invoice.Id);
+                payment.Fortnox_Refunded_Total__c = creditTotals.includingVat;
+                payment.Fortnox_Refunded_Total_Ex_Vat__c = creditTotals.excludingVat;
+                payment.Fakturerat_inkl_moms_N__c  = debitTotals.includingVat;
+                payment.Fakturerat_exkl_moms_N__c = debitTotals.excludingVat;
+
+                if (payment.Refunded_Membership_Amount__c != null) {
+                    payment.is_membership_success_and_refund__c = true;
+                }
+
+                update payment;
+                
+            } catch (Exception e) {
+                //Rollback database changes...
+                Database.rollback(savePoint);
+                //...and log the error
+                insert new Fortnox_Integration_Error_Log__c (
+                    Message__c = e.getMessage(),
+                    Trace__c = e.getStackTraceString(),
+                    Source__c = 'BatchCreateFortnoxInvoiceFromPayment'
+                );
+                System.debug('BatchCreateFortnoxInvoiceFromPayment exception: ' + e);
+            }
+        }
     }
 
+If any errors occur, the database is rolled back to the latest savepoint and an error log is inserted into 
+the ``Fortnox_Integration_Error_Log__c`` object.
 
+createInvoiceRows
+------------------
+
+``createInvoiceRows`` generates ``Fortnox_Invoice_Rows__c`` which are linked to a ``Fortnox_Invoice__c``. Multiple
+`invoice rows` can be linked to a single `invoice`. Before any `invoice rows` are created, a 
+
+.. code-block:: javascript
+
+        public static List<Fortnox_Invoice_Rows__c> createInvoiceRows(Payment__c payment, String invoiceId) {
+        List<Fortnox_Invoice_Rows__c> invoiceRows = new List<Fortnox_Invoice_Rows__c>();
+        Decimal factor = (payment.STATE__c == 'REFUNDED' ? -1 : 1);
+        ....
+
+Membership
+^^^^^^^^^^^
+If the customer has a memberhip, indicated by ``Payment.is_membership__c``, only one `invoice row` will be inserted.
+
+.. code-block:: javascript
+
+    public static Fortnox_Invoice_Rows__c membership(Payment__c payment, String invoiceId, Decimal factor, String currencyIsoCode) {
+        Decimal vatRate = FortnoxProductHelper.vatBySearchName(
+            'subscription_temp',
+            currencyIsoCode
+        );
+
+        Decimal price = payment.total_to_charge__c;
+
+        return new Fortnox_Invoice_Rows__c(
+                Product__c = FortnoxProductHelper.idBySearchName(
+                    'subscription_temp',
+                    currencyIsoCode
+                ),
+                Antal__c = 1,
+                A_Pris__c = factor * price / (1 + vatRate),
+                Fortnox_Invoice__c = invoiceId,
+                Row_Sum_With_VAT__c = factor * price
+            );
+    }
+
+Block fare
+^^^^^^^^^^^
+
+Milage charge
+^^^^^^^^^^^^^^
+
+Late return fee
+^^^^^^^^^^^^^^^^
+
+Promo credit
+^^^^^^^^^^^^^
+
+Addon charge
+^^^^^^^^^^^^^
