@@ -28,7 +28,7 @@ The batch class retrieves objects from ``Payment__c`` with below SOQL query:
             OR (
                 total_to_charge__c > 0 
                 AND subscription_id__c != NULL 
-                AND Type__c = lease 
+                AND Type__c = 'lease'
             )
         )
         AND (
