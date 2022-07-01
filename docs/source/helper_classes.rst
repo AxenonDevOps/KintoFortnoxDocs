@@ -52,39 +52,37 @@ it throws an error if a record is not found.
 
     public class FortnoxProductGeneralCache implements Cache.CacheBuilder {
 
-    public class FortnoxProductGeneralCacheException extends Exception {}
+        public class FortnoxProductGeneralCacheException extends Exception {}
 
-    public Object doLoad(String json) {
+        public Object doLoad(String json) {
 
-        ProductCacheSearch search = ProductCacheSearch.parse(json);
-        List<sObject> products = new List<sObject>();
+            ProductCacheSearch search = ProductCacheSearch.parse(json);
+            List<sObject> products = new List<sObject>();
 
-        if (search.inputType == 'violationType') {
-            String violationType = search.inputValue;
-            products = [
-                SELECT Id, VAT_Decimals__c FROM Product2
-                WHERE Violation_Type_Formula__c = :violationType
-                AND CurrencyIsoCode = :search.currencyIsoCOde
-                LIMIT 1
-            ];
-        } else if (search.inputType == 'searchName') {
-            products = [
-                SELECT Id, VAT_Decimals__c FROM Product2
-                WHERE Search_Name__c = :search.inputValue
-                AND CurrencyIsoCode = :search.currencyIsoCOde
-                LIMIT 1
-            ];
+            if (search.inputType == 'violationType') {
+                String violationType = search.inputValue;
+                products = [
+                    SELECT Id, VAT_Decimals__c FROM Product2
+                    WHERE Violation_Type_Formula__c = :violationType
+                    AND CurrencyIsoCode = :search.currencyIsoCOde
+                    LIMIT 1
+                ];
+            } else if (search.inputType == 'searchName') {
+                products = [
+                    SELECT Id, VAT_Decimals__c FROM Product2
+                    WHERE Search_Name__c = :search.inputValue
+                    AND CurrencyIsoCode = :search.currencyIsoCOde
+                    LIMIT 1
+                ];
+            }
+            
+            if (products.isEmpty()) {
+                throw new FortnoxProductGeneralCacheException(
+                    'The Product2 could not be found for ' + search.inputType +
+                    ' = ' + search.inputValue + ', (' + search.currencyIsoCOde + ')!');
+            }
+            
+            return products[0];
         }
-        
-        if (products.isEmpty()) {
-            throw new FortnoxProductGeneralCacheException(
-                'The Product2 could not be found for ' + search.inputType +
-                ' = ' + search.inputValue + ', (' + search.currencyIsoCOde + ')!');
-        }
-        
-        return products[0];
     }
-}
 
-FortnoxProductCache
---------------------
