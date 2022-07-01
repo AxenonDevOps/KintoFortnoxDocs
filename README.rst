@@ -1,9 +1,8 @@
-Template for the Read the Docs tutorial
+KintoFortnoxDocumentation
 =======================================
 
-This GitHub template includes fictional Python library
-with some basic Sphinx docs.
+This is documentation for the Fortnox-Kinto integration.
 
-Read the tutorial here:
+Read the documentation here:
 
-https://docs.readthedocs.io/en/stable/tutorial/
+https://kintofortnoxdocs-axenondev.readthedocs.io/en/latest/

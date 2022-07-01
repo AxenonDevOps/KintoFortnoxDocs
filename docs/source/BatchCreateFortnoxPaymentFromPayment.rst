@@ -15,7 +15,7 @@ The batch class retrieves objects from ``Payment__c`` with below SOQL query:
             Fortnox_Invoice__c != null
             AND Fortnox_Invoice_Payments__c = null
             AND Fortnox_Invoice__r.Invoice_Sum__c != 0 
-            AND STATE__c != 'FAILED' +
+            AND STATE__c != 'FAILED'
             AND (
                 block_fare__c > 1 
                 OR additional_mileage_charge__c > 1 
