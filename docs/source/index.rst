@@ -21,3 +21,4 @@ Contents
    data_model
    batch_classes
    helper_classes
+   kinto_product_model
