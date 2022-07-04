@@ -10,3 +10,4 @@ Batch classes
     BatchCreateFortnoxPaymentFromRidecell
     BatchCreateFortnoxRefundPayment
     BatchCreateSpecialFortnoxPayment
+    BatchRescuePaymentData

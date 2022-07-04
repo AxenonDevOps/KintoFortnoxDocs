@@ -14,9 +14,10 @@ Contents
 --------
 
 .. toctree::
-   :maxdepth: 3
+   :maxdepth: 1
 
    fortnox_client
+   payment_rescue_client
    data_model
    batch_classes
    helper_classes
